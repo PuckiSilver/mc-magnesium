@@ -1,0 +1,21 @@
+{
+    "name": "mc-magnesium",
+    "author": "PuckiSilver",
+    "description": "Module to load stats from armor",
+    "version": "v0.1.0",
+    "output": "build",
+    "require": ["bolt"],
+
+    "data_pack": {
+        "load": ["src", "libs/mc-tungsten-1.0.0.zip"],
+        "name": "mc-magnesium",
+        "zipped": false
+    },
+
+    "pipeline": ["mecha"],
+    "meta": {
+        "bolt": {
+            "entrypoint": "magn:main"
+        }
+    }
+}
