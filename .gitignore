@@ -1,0 +1,4 @@
+.gitattributes
+.vscode
+.beet_cache
+__pycache__
