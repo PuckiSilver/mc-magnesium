@@ -2,4 +2,4 @@
 .vscode
 .beet_cache
 __pycache__
-.build
+build
