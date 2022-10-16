@@ -11,6 +11,8 @@ slots = [
     "chest",
     "legs",
     "feet",
+    # "mainhand",
+    # "offhand",
 ]
 
 itemLocation = "tungsten:player Item"
