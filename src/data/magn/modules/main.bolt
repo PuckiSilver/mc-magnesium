@@ -11,50 +11,31 @@ slots = [
     "chest",
     "legs",
     "feet",
-    # "mainhand",
-    # "offhand",
 ]
 
-itemLocation = "tungsten:player Item"
+#> register #magn:load into lantern load
+function_tag magn:load { "values":[] }
+append function_tag load:load { "values": [ "#magn:load" ] }
 
-append function_tag load:load { "values": [ "magn:load" ] }
-
-function magn:load: # create all objectives when loading
-    scoreboard objectives add magn dummy
-    for stat in stats:
+#> load function per stat to add scoreboards
+#> register into #magn:load
+for stat in stats:
+    function f'magn:load/{stat}':
         scoreboard objectives add f'magn.{stat}' dummy
         for slot in slots:
             scoreboard objectives add f'magn.{stat}.{slot}' dummy
 
-function magn:uninstall: # inverted load function - removes all objectives
-    scoreboard objectives remove magn
-    for stat in stats:
-        scoreboard objectives remove f'magn.{stat}'
-        for slot in slots:
-            scoreboard objectives remove f'magn.{stat}.{slot}'
+    append function_tag magn:load: { "values": [ f'magn:load/{stat}' ] }
 
+#> functions to calculate stats when swapping equipment
+#> register into tungsten
 for slot in slots:
-    append function_tag f'tungsten:swap/{slot}' { "values": [ f"magn:check_{slot}" ] } # register function into tungsten
+    append function_tag f'tungsten:swap/{slot}' { "values": [ f'#magn:check/{slot}' ] }
+    function_tag f'magn:check/{slot}' {"values":[]}
 
-    function f'magn:check_{slot}': # gets called when swapping, branches to load/reset
-        scoreboard players set .branch1 magn 0
-        if data storage tungsten:player Item.tag.magn unless predicate f'magn:empty_{slot}' run scoreboard players set .branch1 magn 1
-        if score .branch1 magn matches 1 run function f'magn:load_{slot}'
-        if score .branch1 magn matches 0 run function f'magn:reset_{slot}'
-
-    function f'magn:load_{slot}': # loads stats from item
-        for stat in stats:
+    for stat in stats:
+        append function_tag f'magn:check/{slot}' { "values" : [ f'magn:check/{slot}/{stat}' ] }
+        function f'magn:check/{slot}/{stat}':
             scoreboard players operation @s f'magn.{stat}' -= @s f'magn.{stat}.{slot}'
-            execute store result score @s f'magn.{stat}.{slot}' run data get storage f'{itemLocation}.tag.magn.{stat}'
+            execute store result score @s f'magn.{stat}.{slot}' run data get storage tungsten:player f'Item.tag.magn.{stat}'
             scoreboard players operation @s f'magn.{stat}' += @s f'magn.{stat}.{slot}'
-
-    function f'magn:reset_{slot}': # resets stats if no correct item
-        for stat in stats:
-            scoreboard players operation @s f'magn.{stat}' -= @s f'magn.{stat}.{slot}'
-            scoreboard players reset @s f'magn.{stat}.{slot}'
-    
-    predicate f'magn:empty_{slot}': # checks if the respective slot is empty
-        f'{{ "condition": "minecraft:entity_properties", "entity": "this", "predicate": {{ "equipment": {{ "{slot}": {{"items": [ "minecraft:air" ]}}}}}}}}'
-
-
-
