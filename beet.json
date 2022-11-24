@@ -6,7 +6,7 @@
     "require": ["bolt"],
 
     "data_pack": {
-        "load": ["libs/mc-tungsten-1.0.0.zip", "src"],
+        "load": ["libs/mc-tungsten-1.0.1.zip", "src"],
         "name": "mc-magnesium",
         "zipped": false,
         "description": "Module to load stats from armor"
