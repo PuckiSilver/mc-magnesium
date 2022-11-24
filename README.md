@@ -4,6 +4,8 @@ This project can **read stats** from the players equipment in an **efficient** w
 ## **Configure**
 To add or remove a **stat**, navigate to the [main.bolt](src/data/magn/modules/main.bolt) file and modify the `stats` array.
 
+> **Note:** Names of the stats can only contain lowercase characters and underscores!
+
 You can also add or remove a **new slot** inside of the same [main.bolt](src/data/magn/modules/main.bolt) file by modifying the `slots` array to your liking.
 
 ## **Build**

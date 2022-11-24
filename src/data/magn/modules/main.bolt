@@ -2,7 +2,7 @@
 stats = [
     "health",
     "armor",
-    "magicResist",
+    "magic_resist",
     "mana",
 ]
 
