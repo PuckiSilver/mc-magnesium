@@ -8,11 +8,13 @@ To add or remove a **stat**, navigate to the [main.bolt](src/data/magn/modules/m
 
 You can also add or remove a **new slot** inside of the same [main.bolt](src/data/magn/modules/main.bolt) file by modifying the `slots` array to your liking.
 
-## **Build**
+## **Use the pack**
 After configuring the stats and slots to your liking, **build the project using** [**beet**](#dependencies).
 
 The useable **datapack** can be found **inside of the** `build` **folder**.
 Just drop it in a world and it will work.
+
+Alternatively you can **merge** the resulting datapack with your own pack.
 
 ## **Access the stats**
 The stats can be **read at any time** with the `magn.{stat}` scoreboards.<br>
@@ -25,9 +27,12 @@ A give command could look like the following:
 ```mcfunction
 give @s netherite_chestplate{ magn: { armor:82, health:5 }, AttributeModifiers:[{AttributeName:"generic.luck",Name:"tungsten.chest",Amount:-0.000000000001,Operation:0,UUID:[I;12,42069,-0,13],Slot:"chest"}]}
 ```
-This command give the player a netherite chestplate, that has the stats `armor` of 82 and `health` of 5.
+This command gives the player a netherite chestplate, that has the stats `armor` of 82 and `health` of 5.
 
 ## **Dependencies**
 This project uses [beet](https://github.com/mcbeet/beet), [bolt](https://github.com/mcbeet/bolt) and [mecha](https://github.com/mcbeet/mecha).
 
 To detect the **swapping of equipment**, this project uses [mc-tungsten](https://github.com/PuckiSilver/mc-tungsten).
+
+---
+<sub>check me out on [Planet Minecraft](https://www.planetminecraft.com/member/puckisilver/)
